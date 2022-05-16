@@ -2,12 +2,14 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const createError = require("http-errors");
+const compression = require("compression");
 const { PORT } = require("./Config");
 
 const app = express();
 
 // Middlewares
 app.use(cors());
+app.use(compression());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
