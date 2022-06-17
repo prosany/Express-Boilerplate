@@ -7,6 +7,9 @@ const { PORT } = require("./Config");
 
 const app = express();
 
+// Database Connection
+require("./Config/DatabaseConfigrations");
+
 // Middlewares
 app.use(cors());
 app.use(compression());
@@ -23,6 +26,9 @@ app.get("/", async (req, res, next) => {
   });
 });
 
+// Routes
+app.use("/api", require("./Routes/ExampleRoutes"));
+
 // Error Handling
 app.use(async (req, res, next) => {
   next(createError.NotFound());
@@ -37,5 +43,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`🎉 Server Up & Running...`);
+  console.log(`🎉 Server Up & Running... On PORT http://localhost:${PORT} 🎉`);
 });

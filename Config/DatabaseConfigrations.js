@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { APP_ENV, DB_URL, DB_NAME, DB_USER, DB_PASSWORD } = require("./Config");
+const { APP_ENV, DB_URL, DB_NAME, DB_USER, DB_PASSWORD } = require(".");
 
 const mongooseDB_URI =
   APP_ENV === "development"
