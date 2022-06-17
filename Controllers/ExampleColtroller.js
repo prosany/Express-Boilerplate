@@ -18,16 +18,23 @@ const example = async (req, res, next) => {
 
 const examplePagination = async (req, res, next) => {
   try {
-    const { page, limit } = req.query;
+    let { page, limit } = req.query;
+    if (!page) page = 1;
+    if (!limit) limit = 10;
+
+    const limited = parseInt(limit);
+    const skip = parseInt(page - 1) * limited;
     const data = await Example.find({})
-      .skip(parseInt(page) * parseInt(limit))
-      .limit(parseInt(limit));
+      .limit(limited)
+      .skip(skip)
+      .select("-__v");
     const total = await Example.countDocuments();
+
     res.status(200).send({
       status: 1,
-      message: "Login Successful",
+      message: "",
       pagination: {
-        currentPage: parseInt(page),
+        page: parseInt(page),
         limit: parseInt(limit),
         total,
       },
