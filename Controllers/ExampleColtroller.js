@@ -32,7 +32,7 @@ const examplePagination = async (req, res, next) => {
 
     res.status(200).send({
       status: 1,
-      message: "",
+      message: "Successfully Fetched.",
       pagination: {
         page: parseInt(page),
         limit: parseInt(limit),
